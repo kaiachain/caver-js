@@ -96,6 +96,24 @@ caver.utils.convertFromPeb(new BigNumber(1), caver.utils.klayUnit.KLAY)
 // $ExpectType string
 caver.utils.convertFromPeb(new BN(1), caver.utils.klayUnit.KLAY)
 
+// $ExpectType string | BN
+caver.utils.convertToKei(1, 'KAIA')
+// $ExpectType string | BN
+caver.utils.convertToKei('0x1', 'KAIA')
+// $ExpectType string | BN
+caver.utils.convertToKei(new BigNumber(1), 'KAIA')
+// $ExpectType string | BN
+caver.utils.convertToKei(new BN(1), 'KAIA')
+
+// $ExpectType string
+caver.utils.convertFromKei(1, 'KAIA')
+// $ExpectType string
+caver.utils.convertFromKei('0x1', 'KAIA')
+// $ExpectType string
+caver.utils.convertFromKei(new BigNumber(1), 'KAIA')
+// $ExpectType string
+caver.utils.convertFromKei(new BN(1), 'KAIA')
+
 const sig = new SignatureData(['0x01', '0x', '0x'])
 // $ExpectType string
 caver.utils.recover('message', ['0x01', '0x', '0x'])

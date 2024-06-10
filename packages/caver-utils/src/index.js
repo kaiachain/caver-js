@@ -265,6 +265,9 @@ const unitKlayMap = {
     MKLAY: '1000000000000000000000000',
     GKLAY: '1000000000000000000000000000',
     TKLAY: '1000000000000000000000000000000',
+    kei: '1',
+    Gkei: '1000000000',
+    KAIA: '1000000000000000000',
 }
 
 /**
@@ -300,6 +303,9 @@ const KlayUnit = {
     MKLAY: { unit: 'MKLAY', pebFactor: 24 },
     GKLAY: { unit: 'GKLAY', pebFactor: 27 },
     TKLAY: { unit: 'TKLAY', pebFactor: 30 },
+    kei: { unit: 'kei', pebFactor: 0 },
+    Gkei: { unit: 'Gkei', pebFactor: 9 },
+    KAIA: { unit: 'KAIA', pebFactor: 18 },
 }
 
 const unitKlayToEthMap = {
@@ -316,6 +322,9 @@ const unitKlayToEthMap = {
     MKLAY: 'mether',
     GKLAY: 'gether',
     TKLAY: 'tether',
+    kei: 'wei',
+    Gkei: 'gwei',
+    KAIA: 'ether',
 }
 
 const getKlayUnitValue = function(u) {
@@ -417,6 +426,79 @@ function tryNumberToString(number) {
     } catch (e) {
         throw new Error('Please pass numbers as strings or BigNumber objects to avoid precision errors.')
     }
+}
+
+const fromKei = function(number, unit) {
+    // kaia unit to eth unit
+    unit = getKlayUnitValue(unit)
+    unit = unitKlayToEthMap[unit]
+
+    unit = getUnitValue(unit)
+
+    if (!utils.isBN(number) && !_.isString(number)) {
+        number = tryNumberToString(number)
+    }
+
+    return ethjsUnit.fromWei(number, unit)
+}
+
+const toKei = function(number, unit) {
+    // kaia unit to eth unit
+    unit = getKlayUnitValue(unit)
+    unit = unitKlayToEthMap[unit]
+
+    unit = getUnitValue(unit)
+
+    // BigNumber can support decimal points but BN does not support.
+    // So if BigNumber type number is came as a parameter,
+    // use `toString` function of BigNumber to prevent error while converting BigNumber to BN.
+    if (utils.isBigNumber(number)) number = number.toString()
+    if (!utils.isBN(number) && !_.isString(number)) {
+        number = tryNumberToString(number)
+    }
+
+    return utils.isBN(number) ? ethjsUnit.toWei(number, unit) : ethjsUnit.toWei(number, unit).toString(10)
+}
+
+/**
+ * Converts `kei` amount to specific unit amount.
+ * Please note that "kei" is the smallest KAIA unit, and you should always use "kei" as the unit of KAIA.
+ * Convert to "KAIA" only for display reasons.
+ *
+ * @example
+ * const result = caver.utils.convertFromKei('1', 'KAIA') // '0.000000000000000001'
+ * const result = caver.utils.convertFromKei(1, 'KAIA') // '0.000000000000000001'
+ *
+ * @memberof module:utils
+ * @inner
+ *
+ * @param {number|string|BN|BigNumber} amount The value in kei.
+ * @param {string|KlayUnit} [unitString] (default, `'KAIA'`) The unit of KAIA to convert your "kei" into. `number` will be divided by one of the following denominators for the unit provided:<br>- `kei`: '1' <br> - `Gkei`: '1000000000' <br> - `KAIA`: '1000000000000000000' <br>
+ * @return {string} The string number.
+ */
+const convertFromKei = function(amount, unitString) {
+    const converted = fromKei(amount, unitString)
+    return utils.isBN(converted) ? converted.toString(10) : converted
+}
+
+/**
+ * Converts any KAIA value into kei.
+ * Please note that "kei" is the smallest KAIA unit, and you should always use "kei" as the unit of KAIA.
+ *
+ * @example
+ * const result = caver.utils.convertToKei('1', 'KAIA') // '1000000000000000000'
+ * const result = caver.utils.convertToKei(1, 'KAIA') // '1000000000000000000'
+ *
+ * @memberof module:utils
+ * @inner
+ *
+ * @param {number|string|BN|BigNumber} amount the amount to convert
+ * @param {string|KlayUnit} [unitString] (default, `'KAIA'`) The unit of KLAY to convert from. `number` will be divided by one of the following denominators for the unit provided:<br>- `kei`: '1' <br> - `Gkei`: '1000000000' <br> - `KAIA`: '1000000000000000000' <br>
+ * @return {string|BN}
+ */
+const convertToKei = function(number, unitString) {
+    const converted = toKei(number, unitString)
+    return utils.isBN(converted) ? converted.toString(10) : converted
 }
 
 /**
@@ -601,6 +683,12 @@ module.exports = {
     fromPeb: fromPeb,
     convertFromPeb: convertFromPeb,
     convertToPeb: convertToPeb,
+
+    // For Kaia unit
+    toKei: toKei,
+    fromKei: fromKei,
+    convertFromKei: convertFromKei,
+    convertToKei: convertToKei,
 
     BN: utils.BN,
     isBN: utils.isBN,
