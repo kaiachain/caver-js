@@ -308,6 +308,32 @@ const KlayUnit = {
     KAIA: { unit: 'KAIA', pebFactor: 18 },
 }
 
+/**
+ * @example
+ * { unit: 'kei', keiFactor: 0 }
+ *
+ * @typedef {object} module:utils.Unit
+ * @property {string} unit - The unit string.
+ * @property {number} keiFactor - The kei factor.
+ */
+/**
+ * Shows all KAIA units.
+ *
+ * @example
+ * caver.utils.kaiaUnit
+ *
+ * @alias kaiaUnit
+ * @memberof module:utils
+ * @inner
+ *
+ * @type {Map<string,module:utils.Unit>}
+ */
+const KaiaUnit = {
+    kei: { unit: 'kei', keiFactor: 0 },
+    Gkei: { unit: 'Gkei', keiFactor: 9 },
+    KAIA: { unit: 'KAIA', keiFactor: 18 },
+}
+
 const unitKlayToEthMap = {
     peb: 'wei',
     kpeb: 'kwei',
@@ -673,18 +699,19 @@ module.exports = {
     fromAscii: asciiToHex,
 
     unitMap: unitKlayMap,
-    klayUnit: KlayUnit,
+    unitKlayMap: unitKlayMap,
     toWei: toWei,
     fromWei: fromWei,
 
     // For Klay unit
-    unitKlayMap: unitKlayMap,
+    klayUnit: KlayUnit,
     toPeb: toPeb,
     fromPeb: fromPeb,
     convertFromPeb: convertFromPeb,
     convertToPeb: convertToPeb,
 
     // For Kaia unit
+    kaiaUnit: KaiaUnit,
     toKei: toKei,
     fromKei: fromKei,
     convertFromKei: convertFromKei,
