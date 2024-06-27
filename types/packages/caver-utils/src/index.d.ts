@@ -31,7 +31,7 @@ export interface SignatureObject {
     s?: string
 }
 
-export type Unit = 'peb' | 'kpeb' | 'Mpeb' | 'Gpeb' | 'Ston' | 'ston' | 'uKLAY' | 'mKLAY' | 'KLAY' | 'kKLAY' | 'MKLAY' | 'GKLAY' | 'TKLAY'
+export type Unit = 'peb' | 'kpeb' | 'Mpeb' | 'Gpeb' | 'Ston' | 'ston' | 'uKLAY' | 'mKLAY' | 'KLAY' | 'kKLAY' | 'MKLAY' | 'GKLAY' | 'TKLAY' | 'kei' | 'Gkei' | 'KAIA'
 
 export interface UnitInfo {
     unit: string
@@ -56,6 +56,9 @@ export interface UnitMap {
     MKLAY: '1000000000000000000000000'
     GKLAY: '1000000000000000000000000000'
     TKLAY: '1000000000000000000000000000000'
+    kei: '1'
+    Gkei: '1000000000'
+    KAIA: '1000000000000000000'
 }
 
 export type Mixed =
@@ -139,6 +142,11 @@ export interface Utils {
     fromPeb(number: number | string, unit?: Unit): string
     convertFromPeb(number: number | string | BN | BigNumber, unitString: string | UnitInfo): string
     convertToPeb(number: number | string | BN | BigNumber, unitString: string | UnitInfo): string | BN
+    toKei(number: BN, unit?: Unit): BN
+    toKei(number: number | string, unit?: Unit): string
+    fromKei(number: number | string, unit?: Unit): string
+    convertFromKei(number: number | string | BN | BigNumber, unitString: string | UnitInfo): string
+    convertToKei(number: number | string | BN | BigNumber, unitString: string | UnitInfo): string | BN
     isBN(object: object): boolean
     isBN(object: object): boolean
     isBigNumber(num: object): boolean

@@ -51,6 +51,10 @@ describe('CAVERJS-UNIT-ETC-017 : unit map', () => {
             KKLAY    = 1e21 // official notation 'kKLAY'
             MKLAY    = 1e24 // same
             GKLAY    = 1e27 // same
+
+            kei      = 1    // official notation 'kei'
+            Gkei     = 1e9  // same
+            KAIA     = 1e18 // same
         */
         expect(caver.utils.unitMap.peb.length).to.equal(1)
         expect(caver.utils.unitMap.kpeb.length).to.equal(3 + 1)
@@ -63,5 +67,8 @@ describe('CAVERJS-UNIT-ETC-017 : unit map', () => {
         expect(caver.utils.unitMap.kKLAY.length).to.equal(21 + 1)
         expect(caver.utils.unitMap.MKLAY.length).to.equal(24 + 1)
         expect(caver.utils.unitMap.GKLAY.length).to.equal(27 + 1)
+        expect(caver.utils.unitMap.kei.length).to.equal(1)
+        expect(caver.utils.unitMap.Gkei.length).to.equal(9 + 1)
+        expect(caver.utils.unitMap.KAIA.length).to.equal(18 + 1)
     })
 })
