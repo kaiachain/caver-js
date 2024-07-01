@@ -1,11 +1,3 @@
-[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
-
-# NO LONGER MAINTAINED
-
-Since the launch of Kaia Blockchain this repository has been parked in favour of the new open-source projects in [Kaia's Github](https://github.com/kaiachain). Contributors have now moved there continuing with massive open-source contributions to our blockchain ecosystem. A big thank you to everyone who has contributed to this repository. For more information about Klaytn's chain merge with Finschia blockchain please refer to the launching of Kaia blockchain - [kaia.io](https://kaia.io/).
-
----
-
 # caver-js
 
 [![Gitter](https://badges.gitter.im/klaytn/Caver-js.svg)](https://gitter.im/klaytn/Caver-js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -15,10 +7,10 @@ Since the launch of Kaia Blockchain this repository has been parked in favour of
 </p>
 
 caver-js is a JavaScript API library that allows developers to interact with a
-Klaytn node using a HTTP or Websocket connection.
+kaia node using a HTTP or Websocket connection.
 
 **NOTE**
-Kaikas Web Extension Wallet is recommended to be used with [features prior to common architecture](https://docs.klaytn.com/dapp/sdk/caver-js/v1.4.1). New features provided in caver-js v1.5.0 (introduced common architecrue) or later are currently not compatible with Kaikas.
+Kaikas Web Extension Wallet is recommended to be used with [features prior to common architecture](https://docs.kaia.com/dapp/sdk/caver-js/v1.4.1). New features provided in caver-js v1.5.0 (introduced common architecrue) or later are currently not compatible with Kaikas.
 Kaikas web extension wallet works fine with functions prior to common architecture, so please use [functions prior to common architecture](https://docs.klaytn.com/dapp/sdk/caver-js/v1.4.1).
 Even in the latest version of caver-js, [functions prior to common architecture](https://docs.klaytn.com/dapp/sdk/caver-js/v1.4.1) are provided for backward compatibility. See [Trouble shooting and known issues](#connect-with-kaikas-web-extension) for more details.
 
@@ -85,17 +77,10 @@ $ npm run build
 
 Then include `dist/caver.min.js` in your html file. This will expose Caver on the window object.
 
-Or via CDN:
-
-```
-<script src="https://cdnjs.cloudflare.com/ajax/libs/caver-js/x.x.x/caver.min.js"></script>
-```
-
-The caver-js provided by cdnjs can be found at [this link](https://cdnjs.com/libraries/caver-js).
 
 ## Getting Started
 
-If you want to run your own EN (Endpoint Node), see [EN Operation Guide](https://docs.klaytn.com/node/endpoint-node) to set up. You can connect EN like below:
+If you want to run your own EN (Endpoint Node), see [EN Operation Guide](https://docs.kaia.io/docs/nodes/endpoint-node/) to set up. You can connect EN like below:
 ```
 $ node
 > const Caver = require('caver-js')
@@ -107,17 +92,17 @@ $ node
 You can now use caver-js. You can send a basic request to the node as shown below and check the results.
 ```
 > caver.rpc.klay.getClientVersion().then(console.log)
-Klaytn/vX.X.X/linux-amd64/goX.X.X
+kaia/vX.X.X/linux-amd64/goX.X.X
 ```
 
 ### Using caver-js keyring/wallet
 
-You can easily use your Klaytn account when signing a transaction or message by using the [Keyring] / [wallet].
+You can easily use your kaia account when signing a transaction or message by using the [Keyring] / [wallet].
 
 The keyring is a new feature that contains an address and one or more private keys based on the key types ([SingleKeyring], [MultipleKeyring] or [RoleBasedKeyring]). Refer to [caver.wallet.keyring] for details.
 [caver.wallet], the **in-memory wallet**, is provided to easily manage multiple keyrings.
 
-**Note** Functions associated with `wallet` and `keyring` have no effect on the Klaytn blockchain platform. It just manipulates keyrings in the in-memory wallet.
+**Note** Functions associated with `wallet` and `keyring` have no effect on the kaia blockchain platform. It just manipulates keyrings in the in-memory wallet.
 
 Let's create a random keyring as shown in the example below:
 ```
@@ -146,7 +131,7 @@ You can add the keyring object created in the above example to the caver.wallet,
 ```
 
 ### Submitting a Transaction
-You can use caver-js to submit various types of transactions to a node. Please refer to the [caver.transaction](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.transaction/#class) to see how to create a transaction of each type.
+You can use caver-js to submit various types of transactions to a node. Please refer to the [caver.transaction](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-transaction/#class) to see how to create a transaction of each type.
 
 **Note** you should create a transaction instance via `create` function. From caver-js v1.8.2, constructors per transaction type are not supported.
 
@@ -175,7 +160,7 @@ You can sign the transaction using a keyring and send a signed transaction throu
 }
 ```
 
-The above example uses `Promise` when sending a signed transaction to the Klaytn. You can also use `event emitter` like below.
+The above example uses `Promise` when sending a signed transaction to the kaia. You can also use `event emitter` like below.
 
 ```
 caver.rpc.klay.sendRawTransaction(signed).on('transactionHash', function(hash){
@@ -218,24 +203,24 @@ caver-js provides the caver.utils.convertToPeb function for unit conversion. Ple
 
 ## Documentation
 
-Documentation can be found at [Klaytn Docs-caver-js](https://docs.klaytn.com/dapp/sdk/caver-js).
+Documentation can be found at [kaia Docs-caver-js](https://docs.kaia.io/docs/references/sdk/caver-js).
 
 ## API Specification
 
 The API lists of caver-js are described in folloinwg links:
 
-* [caver.account](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.account)
-* [caver.wallet](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet)
-* [caver.wallet.keyring](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet/keyring)
-* [caver.transaction](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.transaction)
-* [caver.rpc.klay](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.rpc/klay)
-* [caver.rpc.net](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.rpc/net)
-* [caver.contract](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.contract)
-* [caver.abi](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.abi)
-* [caver.kct.kip7](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.kct/kip7)
-* [caver.kct.kip17](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.kct/kip17)
-* [caver.utils](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.utils)
-* [caver.ipfs](https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.ipfs)
+* [caver.account](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver.account)
+* [caver.wallet](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet)
+* [caver.wallet.keyring](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet/keyring)
+* [caver.transaction](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-transaction)
+* [caver.rpc.klay](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-rpc/klay)
+* [caver.rpc.net](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-rpc/net)
+* [caver.contract](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver.contract)
+* [caver.abi](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver.abi)
+* [caver.kct.kip7](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-kct/kip7)
+* [caver.kct.kip17](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-kct/kip17)
+* [caver.utils](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver.utils)
+* [caver.ipfs](https://docs.kaia.io/docs/references/sdk/caver-js/api/caver.ipfs)
 
 ## Web3.js Similarity
 
@@ -258,7 +243,7 @@ caver.rpc.klay.getBalance('0x407d73d8a49eeb85d32cf465507dd71d507100c1').then(con
 ## Error Code Improvement
 
 
-Klaytn improves reporting transaction failure via txError in the receipt.
+kaia improves reporting transaction failure via txError in the receipt.
 caver-js further improves the report by presenting the error string that corresponds to txError.
 
 The below is an example of a receipt containing txError.
@@ -311,8 +296,8 @@ The meaning of error code can be found below:
 
 The BApp (Blockchain Application) Development sample projects using caver-js are the following:
 
-* [Count BApp](https://docs.klaytn.com/dapp/tutorials/count-bapp)
-* [Klaystagram](https://docs.klaytn.com/dapp/tutorials/klaystagram)
+* [Count DApp](https://docs.kaia.io/docs/build/tutorials/count-dapp/)
+* [Klaystagram](https://docs.kaia.io/docs/build/tutorials/klaystagram/)
 
 ## Trouble shooting and known issues
 
@@ -322,7 +307,7 @@ Kaikas Web Extension Wallet works normally with [functions prior to common archi
 Features provided in later versions (caver-js v1.5.0~) may not work with Kaikas Web Extension Wallet.
 
 If the following error occurs when using with Kaikas, it must be modified to use the [functions supported by caver-js v1.4.1](https://docs.klaytn.com/dapp/sdk/caver-js/v1.4.1).
-For compatibility with the latest version, the same [functions provided by caver-js v1.4.0](https://docs.klaytn.com/dapp/sdk/caver-js/v1.4.1) are provided.
+For compatibility with the latest version, the same [functions provided by caver-js v1.4.1](https://docs.klaytn.com/dapp/sdk/caver-js/v1.4.1) are provided.
 
 ```
 Kaikas only processes one transaction at a time. Open Kaikas and refresh the pending transaction. If the service doesn’t process your transaction for a while, cancel the pending transaction.
@@ -367,17 +352,17 @@ More information on using react-app-rewired with create-react-app can be found [
 
 ## Github Repository
 
-* [caver-js](https://github.com/klaytn/caver-js)
+* [caver-js](https://github.com/kaiachain/caver-js)
 
 ## Related Projects
 
-[caver-java](https://github.com/klaytn/caver-java) for Java
+[caver-java](https://github.com/kaiachain/caver-java) for Java
 
 
-[Keyring]: https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet/keyring
-[caver.wallet.keyring]: https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet/keyring
-[wallet]: https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet
-[caver.wallet]: https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet
-[SingleKeyring]: https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet/keyring#singlekeyring
-[MultipleKeyring]: https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet/keyring#multiplekeyring
-[RoleBasedKeyring]: https://docs.klaytn.com/dapp/sdk/caver-js/api-references/caver.wallet/keyring#rolebasedkeyring
+[Keyring]: https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet/keyring
+[caver.wallet.keyring]: https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet/keyring
+[wallet]: https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet
+[caver.wallet]: https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet
+[SingleKeyring]: https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet/keyring#singlekeyring
+[MultipleKeyring]: https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet/keyring#multiplekeyring
+[RoleBasedKeyring]: https://docs.kaia.io/docs/references/sdk/caver-js/api/caver-wallet/keyring#rolebasedkeyring
