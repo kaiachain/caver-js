@@ -1023,6 +1023,9 @@ describe('caver.utils.unitMap', () => {
         expect(result.MKLAY).to.equals('1000000000000000000000000')
         expect(result.GKLAY).to.equals('1000000000000000000000000000')
         expect(result.TKLAY).to.equals('1000000000000000000000000000000')
+        expect(result.kei).to.equals('1')
+        expect(result.Gkei).to.equals('1000000000')
+        expect(result.KAIA).to.equals('1000000000000000000')
     })
 })
 
@@ -1039,6 +1042,82 @@ describe('caver.utils.klayUnit', () => {
                     .pow(caver.utils.toBN(pebFactor))
                     .toString(10)
             )
+        })
+    })
+})
+
+describe('caver.utils.toKei', () => {
+    const { unitMap } = utils
+
+    context('CAVERJS-UNIT-ETC-251: input: various type', () => {
+        const tests = [
+            { value: 1, expected: unitMap.KAIA },
+            { value: '1', expected: unitMap.KAIA },
+            { value: 123456789, expected: new BigNumber(unitMap.KAIA * 123456789).toFixed(0) },
+            { value: '123456789', expected: new BigNumber(unitMap.KAIA * 123456789).toFixed(0) },
+            { value: new BN(1), expected: unitMap.KAIA },
+            { value: new BN('1'), expected: unitMap.KAIA },
+            { value: new BN(123456789), expected: new BigNumber(unitMap.KAIA * 123456789).toFixed(0) },
+            { value: new BN('123456789'), expected: new BigNumber(unitMap.KAIA * 123456789).toFixed(0) },
+        ]
+        it('should return string', () => {
+            for (const test of tests) {
+                expect(caver.utils.toKei(test.value).toString()).to.be.equal(test.expected.toString())
+            }
+        })
+    })
+
+    context('CAVERJS-UNIT-ETC-252: input: base unitmap', () => {
+        const tests = [
+            { value: 1, unit: 'kei', expected: unitMap.kei },
+            { value: 1, unit: 'Gkei', expected: unitMap.Gkei },
+            { value: 1, unit: 'KAIA', expected: unitMap.KAIA },
+        ]
+        it('should return string', () => {
+            for (const test of tests) {
+                expect(caver.utils.toKei(test.value, test.unit)).to.be.equal(test.expected)
+            }
+        })
+    })
+})
+
+describe('caver.utils.fromKei', () => {
+    const { unitMap } = utils
+
+    context('CAVERJS-UNIT-ETC-253: fromKei without unit', () => {
+        const tests = [
+            { value: 1, kei: unitMap.KAIA },
+            { value: '1', kei: unitMap.KAIA },
+            { value: 123456789, kei: unitMap.KAIA },
+            { value: '123456789', kei: unitMap.KAIA },
+            { value: new BN(1), kei: unitMap.KAIA },
+            { value: new BN('1'), kei: unitMap.KAIA },
+            { value: new BN(123456789), kei: unitMap.KAIA },
+            { value: new BN('123456789'), kei: unitMap.KAIA },
+        ]
+        it('should return string based on unitMap', () => {
+            for (const test of tests) {
+                const bn = new BigNumber(test.kei)
+                const expected = (0.1 ** bn.e * test.value).toFixed(bn.e)
+
+                expect(caver.utils.fromKei(test.value)).to.be.equal(expected)
+            }
+        })
+    })
+
+    context('CAVERJS-UNIT-ETC-254: fromKei with unit', () => {
+        const tests = [
+            { value: 1, unit: 'kei', kei: unitMap.kei },
+            { value: 1, unit: 'Gkei', kei: unitMap.Gkei },
+            { value: 1, unit: 'KAIA', kei: unitMap.KAIA },
+        ]
+        it('should return string based on unitMap', () => {
+            for (const test of tests) {
+                const bn = new BigNumber(test.kei)
+                const expected = (0.1 ** bn.e * test.value).toFixed(bn.e)
+
+                expect(caver.utils.fromKei(test.value, test.unit)).to.be.equal(expected)
+            }
         })
     })
 })
