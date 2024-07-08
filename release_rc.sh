@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fetch tags from upstream first
-git fetch -t git@github.com:klaytn/caver-js.git
+git fetch -t git@github.com:kaiachain/caver-js.git
 
 VERSION=$(cat package.json | jq -r '.["version"]')
 echo "Trying to tag v$VERSION"
