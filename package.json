@@ -1,7 +1,7 @@
 {
   "name": "caver-js",
-  "version": "1.12.0",
-  "description": "caver-js is a JavaScript API library that allows developers to interact with a Klaytn node",
+  "version": "1.12.1",
+  "description": "caver-js is a JavaScript API library that allows developers to interact with a Kaia node",
   "main": "index.js",
   "types": "types/index.d.ts",
   "scripts": {
@@ -50,19 +50,20 @@
     "caverjs",
     "caver-js",
     "caver.js",
-    "klaytn",
-    "klaytn sdk",
-    "klaytn api"
+    "kaia",
+    "kaia chain",
+    "kaia sdk",
+    "kaia api"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/klaytn/caver-js.git"
+    "url": "https://github.com/kaiachain/caver-js.git"
   },
   "bugs": {
-    "url": "https://github.com/klaytn/caver-js/issues"
+    "url": "https://github.com/kaiachain/caver-js/issues"
   },
-  "homepage": "https://github.com/klaytn/caver-js",
-  "author": "Klaytn Team",
+  "homepage": "https://github.com/kaiachain/caver-js",
+  "author": "Kaia Team",
   "license": "LGPL-3.0",
   "dependencies": {
     "@babel/runtime": "7.3.1",
