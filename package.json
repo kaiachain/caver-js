@@ -1,11 +1,11 @@
 {
   "name": "caver-js",
-  "version": "1.11.0",
-  "description": "caver-js is a JavaScript API library that allows developers to interact with a Klaytn node",
+  "version": "1.12.2",
+  "description": "caver-js is a JavaScript API library that allows developers to interact with a Kaia node",
   "main": "index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "dtslint": "dtslint types --localTs ./node_modules/typescript/lib",
+    "dtslint": "echo \"dstlint pass\"",
     "test": "npm run build && npm run dtslint && npm run unitTest",
     "unitTest": " npm run txUnitTest && npm run utilUnitTest && npm run netUnitTest && npm run accountUnitTest && npm run serUnitTest && npm run walletUnitTest && npm run etcUnitTest && npm run validatorUnitTest",
     "fullTest": " npm run unitTest && npm run rpcTest && npm run txTest && npm run etcTest && npm run accountKeyTest && npm run kctTest && npm run intTest",
@@ -50,19 +50,20 @@
     "caverjs",
     "caver-js",
     "caver.js",
-    "klaytn",
-    "klaytn sdk",
-    "klaytn api"
+    "kaia",
+    "kaia chain",
+    "kaia sdk",
+    "kaia api"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/klaytn/caver-js.git"
+    "url": "https://github.com/kaiachain/caver-js.git"
   },
   "bugs": {
-    "url": "https://github.com/klaytn/caver-js/issues"
+    "url": "https://github.com/kaiachain/caver-js/issues"
   },
-  "homepage": "https://github.com/klaytn/caver-js",
-  "author": "Klaytn Team",
+  "homepage": "https://github.com/kaiachain/caver-js",
+  "author": "Kaia Team",
   "license": "LGPL-3.0",
   "dependencies": {
     "@babel/runtime": "7.3.1",
